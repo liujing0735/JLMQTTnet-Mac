@@ -18,8 +18,8 @@ def normal
 end
 
 def mqtt
-	#pod 'MQTTClient'
-    pod 'CocoaMQTT'
+	pod 'MQTTClient'
+    #pod 'CocoaMQTT'
 end
 
 def socket
