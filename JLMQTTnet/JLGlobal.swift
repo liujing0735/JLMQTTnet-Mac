@@ -8,16 +8,14 @@
 
 import Cocoa
 
-struct MQTT {
+struct MQTTModel {
     
     init() {
         let defaults = UserDefaults.standard
-        if let value = defaults.string(forKey: "ip") {
-            ip = value
+        if let value = defaults.string(forKey: "host") {
+            host = value
         }
-        if let value = defaults.string(forKey: "port") {
-            port = Int(value)!
-        }
+        port = defaults.integer(forKey: "port")
         if let value = defaults.string(forKey: "username") {
             username = value
         }
@@ -27,26 +25,27 @@ struct MQTT {
         if let value = defaults.string(forKey: "clientID") {
             clientID = value
         }
-        if let value = defaults.string(forKey: "keepalive") {
-            keepalive = Int(value)!
-        }
+        keepalive = defaults.integer(forKey: "keepalive")
+        cleanSession = defaults.integer(forKey: "cleanSession")
     }
     
     func save() {
         let defaults = UserDefaults.standard
-        defaults.set(ip, forKey: "ip")
+        defaults.set(host, forKey: "host")
         defaults.set("\(port)", forKey: "port")
         defaults.set(username, forKey: "username")
         defaults.set(password, forKey: "password")
         defaults.set(clientID, forKey: "clientID")
         defaults.set("\(keepalive)", forKey: "keepalive")
+        defaults.set(cleanSession, forKey: "cleanSession")
         defaults.synchronize()
     }
     
-    var ip: String = ""
+    var host: String = ""
     var port: Int = 0
     var username: String = ""
     var password: String = ""
     var clientID: String = ""
     var keepalive: Int = 0
+    var cleanSession: Int = 1
 }

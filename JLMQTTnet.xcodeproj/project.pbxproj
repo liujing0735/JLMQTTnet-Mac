@@ -15,7 +15,8 @@
 		229060592117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229060582117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift */; };
 		2290605B2117F4140070EDC4 /* JLMQTTMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290605A2117F4140070EDC4 /* JLMQTTMainViewController.swift */; };
 		2290605D211829040070EDC4 /* JLGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290605C211829040070EDC4 /* JLGlobal.swift */; };
-		53F00CB858158DACACE828E1 /* Pods_JLMQTTnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B753C5EC3644A4912B34C41 /* Pods_JLMQTTnet.framework */; };
+		22906063211925DC0070EDC4 /* JLMQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906062211925DC0070EDC4 /* JLMQTTManager.swift */; };
+		840C4BCB3C4F30213FFA8EE6 /* Pods_JLMQTTnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BFC5929513BFB39E6067C4 /* Pods_JLMQTTnet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B753C5EC3644A4912B34C41 /* Pods_JLMQTTnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JLMQTTnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2209DA2821159F4C00736DFD /* JLMQTTnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JLMQTTnet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2209DA2B21159F4C00736DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2209DA2F21159F4D00736DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,8 +53,10 @@
 		2290605A2117F4140070EDC4 /* JLMQTTMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLMQTTMainViewController.swift; sourceTree = "<group>"; };
 		2290605C211829040070EDC4 /* JLGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLGlobal.swift; sourceTree = "<group>"; };
 		2290605E211842580070EDC4 /* JLMQTTnet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JLMQTTnet-Bridging-Header.h"; sourceTree = "<group>"; };
+		22906062211925DC0070EDC4 /* JLMQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLMQTTManager.swift; sourceTree = "<group>"; };
 		800E3C5FA0EC8554666F15A3 /* Pods-JLMQTTnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLMQTTnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JLMQTTnet/Pods-JLMQTTnet.debug.xcconfig"; sourceTree = "<group>"; };
 		A393FF09A7C8FED2BC4C6871 /* Pods-JLMQTTnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLMQTTnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLMQTTnet/Pods-JLMQTTnet.release.xcconfig"; sourceTree = "<group>"; };
+		B8BFC5929513BFB39E6067C4 /* Pods_JLMQTTnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JLMQTTnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53F00CB858158DACACE828E1 /* Pods_JLMQTTnet.framework in Frameworks */,
+				840C4BCB3C4F30213FFA8EE6 /* Pods_JLMQTTnet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +119,7 @@
 				2209DA3521159F4D00736DFD /* JLMQTTnet.entitlements */,
 				2290605C211829040070EDC4 /* JLGlobal.swift */,
 				2290605E211842580070EDC4 /* JLMQTTnet-Bridging-Header.h */,
+				22906062211925DC0070EDC4 /* JLMQTTManager.swift */,
 			);
 			path = JLMQTTnet;
 			sourceTree = "<group>";
@@ -151,7 +154,7 @@
 		631576C7726593099353E802 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B753C5EC3644A4912B34C41 /* Pods_JLMQTTnet.framework */,
+				B8BFC5929513BFB39E6067C4 /* Pods_JLMQTTnet.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,7 +170,7 @@
 				2209DA2421159F4C00736DFD /* Sources */,
 				2209DA2521159F4C00736DFD /* Frameworks */,
 				2209DA2621159F4C00736DFD /* Resources */,
-				7BFFB9216E036C97B5E4D661 /* [CP] Embed Pods Frameworks */,
+				D0EAA7196C850BC833ABDDAE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -227,6 +230,11 @@
 					2209DA2721159F4C00736DFD = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 0940;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					2209DA3921159F4D00736DFD = {
 						CreatedOnToolsVersion = 9.4;
@@ -285,7 +293,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7BFFB9216E036C97B5E4D661 /* [CP] Embed Pods Frameworks */ = {
+		AD1E54A9C22D5CD8150951A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JLMQTTnet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0EAA7196C850BC833ABDDAE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,24 +331,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JLMQTTnet/Pods-JLMQTTnet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AD1E54A9C22D5CD8150951A6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JLMQTTnet-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -331,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2290605D211829040070EDC4 /* JLGlobal.swift in Sources */,
+				22906063211925DC0070EDC4 /* JLMQTTManager.swift in Sources */,
 				2290605B2117F4140070EDC4 /* JLMQTTMainViewController.swift in Sources */,
 				2209DA2C21159F4C00736DFD /* AppDelegate.swift in Sources */,
 				229060592117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift in Sources */,

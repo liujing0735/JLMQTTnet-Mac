@@ -777,15 +777,15 @@
                                                         <rect key="frame" x="1" y="0.0" width="730" height="200"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Jj1-zx-cxU" viewBased="YES" id="dbD-vn-KUs">
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Jj1-zx-cxU" viewBased="YES" id="dbD-vn-KUs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="730" height="177"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn identifier="" width="116" minWidth="40" maxWidth="1000" id="Nvi-Ef-IeF">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                                    <tableColumn identifier="IndexTableViewCell" width="116" minWidth="40" maxWidth="1000" id="Nvi-Ef-IeF">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Index">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -817,8 +817,8 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn identifier="" width="608" minWidth="40" maxWidth="1000" id="UL5-13-thz">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                                    <tableColumn identifier="ClientIDTableViewCell" width="608" minWidth="40" maxWidth="1000" id="UL5-13-thz">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ClientID">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -855,7 +855,7 @@
                                                         </subviews>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="YnB-0y-hcM">
-                                                        <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                                        <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="7ra-zC-a3H">
@@ -941,14 +941,14 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <clipView key="contentView" ambiguous="YES" id="g3J-Ey-KSw">
                                                         <rect key="frame" x="1" y="1" width="614" height="166"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="maQ-xs-XRv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="614" height="166"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <size key="minSize" width="614" height="166"/>
-                                                                <size key="maxSize" width="614" height="10000000"/>
+                                                                <size key="maxSize" width="616" height="10000000"/>
                                                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </textView>
                                                         </subviews>
@@ -959,7 +959,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="iqX-dN-Lqv">
-                                                        <rect key="frame" x="599" y="1" width="16" height="166"/>
+                                                        <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>
@@ -1008,30 +1008,30 @@
                                     <action selector="valueChangedAction:" target="XfG-lQ-9wD" id="jF9-rP-uAR"/>
                                 </connections>
                             </segmentedControl>
-                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfy-3i-CaL">
-                                <rect key="frame" x="14" y="20" width="773" height="261"/>
+                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6z-uu-gHW">
+                                <rect key="frame" x="13" y="11" width="773" height="270"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <clipView key="contentView" ambiguous="YES" id="giA-kN-bdY">
-                                    <rect key="frame" x="1" y="1" width="771" height="259"/>
+                                <clipView key="contentView" ambiguous="YES" id="iDn-V9-92p">
+                                    <rect key="frame" x="1" y="1" width="771" height="268"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="jvO-jH-DH7">
-                                            <rect key="frame" x="0.0" y="-1" width="771" height="259"/>
+                                        <textView ambiguous="YES" editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="j9c-ny-iwE">
+                                            <rect key="frame" x="0.0" y="0.0" width="771" height="268"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="771" height="259"/>
+                                            <size key="minSize" width="771" height="268"/>
                                             <size key="maxSize" width="771" height="10000000"/>
                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ro9-dj-h2A">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="JO3-8d-mVc">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Azj-75-s4O">
-                                    <rect key="frame" x="756" y="1" width="16" height="259"/>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="UEH-8E-f8O">
+                                    <rect key="frame" x="756" y="1" width="16" height="268"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1039,9 +1039,9 @@
                     </view>
                     <connections>
                         <outlet property="clientControlButton" destination="1yW-cG-gxq" id="c9V-v1-Yz6"/>
-                        <outlet property="clientInfoTableView" destination="zpQ-qK-lCw" id="3C7-0n-2xZ"/>
+                        <outlet property="clientInfoTableView" destination="dbD-vn-KUs" id="Gfa-eY-IIm"/>
                         <outlet property="clientNumberTextField" destination="bPA-Yy-jdJ" id="0k2-hT-dRE"/>
-                        <outlet property="logTextView" destination="wfy-3i-CaL" id="3Nt-Sh-Ras"/>
+                        <outlet property="logTextView" destination="j9c-ny-iwE" id="C9U-Vj-Pfc"/>
                         <outlet property="segmentedControl" destination="oUh-ru-icj" id="Ts8-bA-kEl"/>
                         <outlet property="tabView" destination="br9-7E-Bat" id="nPg-1Z-hKU"/>
                     </connections>
@@ -1058,9 +1058,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVF-tB-HYl">
-                                <rect key="frame" x="18" y="199" width="68" height="17"/>
+                                <rect key="frame" x="18" y="199" width="33" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IP address" id="Qni-sP-1j8">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Host" id="Qni-sP-1j8">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1187,7 +1187,7 @@
                     <connections>
                         <outlet property="cleanSessionCheck" destination="jtc-20-qa7" id="FTw-Ss-OhK"/>
                         <outlet property="clientIDTextField" destination="lKD-X4-jDg" id="BvU-bf-xg0"/>
-                        <outlet property="ipAddressTextField" destination="93u-kD-z5L" id="cWo-CV-72K"/>
+                        <outlet property="hostTextField" destination="93u-kD-z5L" id="O2Y-OB-L1n"/>
                         <outlet property="keepaliveTextField" destination="4N6-N3-uJq" id="1ws-40-aSm"/>
                         <outlet property="passwordTextField" destination="b9n-MP-aRF" id="1c9-7H-NGr"/>
                         <outlet property="portTextField" destination="Rsr-Fq-ZlT" id="Y4x-1U-TiT"/>

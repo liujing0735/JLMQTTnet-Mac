@@ -10,7 +10,7 @@ import Cocoa
 
 class JLMQTTConfigurationPageController: NSPageController {
     
-    @IBOutlet weak var ipAddressTextField: NSTextField!
+    @IBOutlet weak var hostTextField: NSTextField!
     @IBOutlet weak var portTextField: NSTextField!
     @IBOutlet weak var usernameTextField: NSTextField!
     @IBOutlet weak var passwordTextField: NSTextField!
@@ -21,26 +21,27 @@ class JLMQTTConfigurationPageController: NSPageController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        let mqtt = MQTT()
-        ipAddressTextField.stringValue = mqtt.ip
+        let mqtt = MQTTModel()
+        hostTextField.stringValue = mqtt.host
         portTextField.stringValue = "\(mqtt.port)"
         usernameTextField.stringValue = mqtt.username
         passwordTextField.stringValue = mqtt.password
         clientIDTextField.stringValue = mqtt.clientID
         keepaliveTextField.stringValue = "\(mqtt.keepalive)"
-        //cleanSessionCheck
+        cleanSessionCheck.state = NSControl.StateValue(rawValue: mqtt.cleanSession)
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
         
-        var mqtt = MQTT()
-        mqtt.ip = ipAddressTextField.stringValue
+        var mqtt = MQTTModel()
+        mqtt.host = hostTextField.stringValue
         mqtt.port = portTextField.integerValue
         mqtt.username = usernameTextField.stringValue
         mqtt.password = passwordTextField.stringValue
         mqtt.clientID = clientIDTextField.stringValue
         mqtt.keepalive = keepaliveTextField.integerValue
+        mqtt.cleanSession = cleanSessionCheck.state.rawValue
         mqtt.save()
     }
 }
