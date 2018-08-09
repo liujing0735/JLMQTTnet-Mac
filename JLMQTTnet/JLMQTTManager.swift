@@ -10,9 +10,9 @@ import Cocoa
 
 protocol JLMQTTManagerDelegate {
     func didConnect(session: MQTTSession, error: Error!)
-    func didSubscribe(session: MQTTSession, error: Error!, gQoss: [NSNumber]!)
-    func didUnsubscribe(session: MQTTSession, error: Error!)
-    func didPublishData(session: MQTTSession, error: Error!)
+    func didSubscribe(session: MQTTSession, error: Error!, topic: String, gQoss: [NSNumber]!)
+    func didUnsubscribe(session: MQTTSession, error: Error!, topic: String)
+    func didPublishData(session: MQTTSession, error: Error!, topic: String)
     func message(session: MQTTSession, data: Data!, topic: String, qos: MQTTQosLevel, retained: Bool, mid: UInt32)
 }
 
@@ -23,6 +23,18 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
         topicSet = []
         sessions = []
     }
+    var session: MQTTSession {
+        set {
+            _session = newValue
+        }
+        get {
+            if _session == nil {
+                _session = createSession()
+            }
+            return _session
+        }
+    }
+    private var _session: MQTTSession!
     private var sessions: [MQTTSession]!
     private var topicSet: Set<String>!
     private var _random: Int = Int(arc4random() % 999) + 100
@@ -54,36 +66,38 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
     var subscribeQos: MQTTQosLevel = .exactlyOnce
     var publishQos: MQTTQosLevel = .exactlyOnce
     
+    private func createSession() -> MQTTSession {
+        let transport = MQTTCFSocketTransport()
+        transport.host = self.host
+        transport.port = self.port
+        
+        let session = MQTTSession()
+        session?.transport = transport
+        session?.userName = self.userName
+        session?.password = self.password
+        session?.clientId = self.clientId + "_" + "\(self.random)" + String(format: "%03d", self.sessionIndex)
+        session?.keepAliveInterval = self.keepAliveInterval
+        session?.cleanSessionFlag = self.cleanSessionFlag
+        return session!
+    }
+    
     func addSession() {
         let blockOperation = BlockOperation {
-            let transport = MQTTCFSocketTransport()
-            transport.host = self.host
-            transport.port = self.port
             
-            let session = MQTTSession()
-            session?.transport = transport
-            session?.userName = self.userName
-            session?.password = self.password
-            session?.clientId = self.clientId + "_" + "\(self.random)" + String(format: "%03d", self.sessionIndex)
-            session?.keepAliveInterval = self.keepAliveInterval
-            session?.cleanSessionFlag = self.cleanSessionFlag
-
-            self.connect(session: session!)
+            let session = self.createSession()
+            self.connect(session: session)
             
             self.sessionLock.lock()
-            self.sessions.append(session!)
+            self.sessions.append(session)
             self.sessionLock.unlock()
         }
         operationQueue.addOperation(blockOperation)
     }
     
     func addSessions(number: uint) {
-        //let blockOperation = BlockOperation {
-            for _ in 0..<number {
-                self.addSession()
-            }
-        //}
-        //operationQueue.addOperation(blockOperation)
+        for _ in 0..<number {
+            self.addSession()
+        }
     }
     
     func addTopic(topic: String) {
@@ -100,6 +114,7 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             self.topicSetLock.lock()
             topicSet.insert(topic)
             self.topicSetLock.unlock()
+            subscribe(session: session, topic: topic)
             for session in sessions {
                 if session.status == .connected {
                     subscribe(session: session, topic: topic)
@@ -107,11 +122,12 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             }
         }
     }
-
+    
     func removeTopic(topic: String) {
         self.topicSetLock.lock()
         topicSet.remove(topic)
         self.topicSetLock.unlock()
+        unsubscribe(session: session, topic: topic)
         for session in sessions {
             if session.status == .connected {
                 unsubscribe(session: session, topic: topic)
@@ -124,20 +140,18 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             self.topicSetLock.lock()
             topicSet.remove(topic)
             self.topicSetLock.unlock()
+            unsubscribe(session: session, topic: topic)
             for session in sessions {
-                if session.status == .connected {
-                    unsubscribe(session: session, topic: topic)
-                }
+                unsubscribe(session: session, topic: topic)
             }
         }
     }
     
     func removeAllTopic() {
         for topic in topicSet {
+            unsubscribe(session: session, topic: topic)
             for session in sessions {
-                if session.status == .connected {
-                    unsubscribe(session: session, topic: topic)
-                }
+                unsubscribe(session: session, topic: topic)
             }
         }
         self.topicSetLock.lock()
@@ -148,11 +162,12 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
     private func connect(session: MQTTSession) {
         if session.status == .created {
             session.delegate = self
-            session.connectAndWaitTimeout(30)
+            session.connectAndWaitTimeout(5)
         }
     }
     
     func connect() {
+        connect(session: session)
         for session in sessions {
             connect(session: session)
         }
@@ -165,6 +180,7 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
     }
     
     func disconnect() {
+        disconnect(session: session)
         for session in sessions {
             disconnect(session: session)
         }
@@ -194,17 +210,21 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
     }
     
     private func subscribe(session: MQTTSession, topic: String) {
-        session.subscribe(toTopic: topic, at: subscribeQos) { (error, gQoss) in
-            if self.delegate != nil {
-                self.delegate.didSubscribe(session: session, error: error, gQoss: gQoss)
+        if session.status == .connected {
+            session.subscribe(toTopic: topic, at: subscribeQos) { (error, gQoss) in
+                if self.delegate != nil {
+                    self.delegate.didSubscribe(session: session, error: error, topic: topic, gQoss: gQoss)
+                }
             }
         }
     }
     
     private func unsubscribe(session: MQTTSession, topic: String) {
-        session.unsubscribeTopic(topic) { (error) in
-            if self.delegate != nil {
-                self.delegate.didUnsubscribe(session: session, error: error)
+        if session.status == .connected {
+            session.unsubscribeTopic(topic) { (error) in
+                if self.delegate != nil {
+                    self.delegate.didUnsubscribe(session: session, error: error, topic: topic)
+                }
             }
         }
     }
@@ -222,6 +242,20 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
         }
     }
     
+    func publishData(data: Data, topics: [String]) {
+        for topic in topics {
+            publishData(data: data, topic: topic)
+        }
+    }
+    
+    func publishData(data: Data, topic: String) {
+        if session.status == .connected {
+            publishData(session: session, data: data, topic: topic, retain: true, qos: publishQos)
+        }else {
+            connect()
+        }
+    }
+    
     func publishData(session: MQTTSession!, data: Data, topic: String) {
         publishData(session: session, data: data, topic: topic, retain: true, qos: publishQos)
     }
@@ -234,7 +268,7 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
         if session.status == .connected {
             session.publishData(data, onTopic: topic, retain: retain, qos: qos) { (error) in
                 if self.delegate != nil {
-                    self.delegate.didPublishData(session: session, error: error)
+                    self.delegate.didPublishData(session: session, error: error, topic: topic)
                 }
             }
         }
