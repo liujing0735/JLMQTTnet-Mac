@@ -53,6 +53,46 @@ extension String {
     }
 }
 
+struct PreferencesModel {
+    
+    init() {
+        let defaults = UserDefaults.standard
+        clientNumber = defaults.integer(forKey: "clientNumber")
+        isHexString = defaults.integer(forKey: "isHexString")
+        subscribeQosLevel = defaults.integer(forKey: "subscribeQosLevel")
+        if let value = defaults.string(forKey: "subscribeTopic") {
+            subscribeTopic = value
+        }
+        publishQosLevel = defaults.integer(forKey: "publishQosLevel")
+        if let value = defaults.string(forKey: "publishTopic") {
+            publishTopic = value
+        }
+        if let value = defaults.string(forKey: "publishMessage") {
+            publishMessage = value
+        }
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        defaults.set("\(clientNumber)", forKey: "clientNumber")
+        defaults.set("\(isHexString)", forKey: "isHexString")
+        defaults.set("\(subscribeQosLevel)", forKey: "subscribeQosLevel")
+        defaults.set(subscribeTopic, forKey: "subscribeTopic")
+        defaults.set("\(publishQosLevel)", forKey: "publishQosLevel")
+        defaults.set(publishTopic, forKey: "publishTopic")
+        defaults.set(publishMessage, forKey: "publishMessage")
+        defaults.synchronize()
+    }
+    
+    var clientNumber: Int = 0
+    var isHexString: Int = 1
+    var subscribeQosLevel: Int = 0
+    var subscribeTopic: String = ""
+    var publishQosLevel: Int = 0
+    var publishTopic: String = ""
+    var publishMessage: String = ""
+}
+
 struct MQTTModel {
     
     init() {
@@ -61,6 +101,9 @@ struct MQTTModel {
             host = value
         }
         port = defaults.integer(forKey: "port")
+        if port == 0 {
+            port = 1883
+        }
         if let value = defaults.string(forKey: "username") {
             username = value
         }
@@ -69,8 +112,13 @@ struct MQTTModel {
         }
         if let value = defaults.string(forKey: "clientID") {
             clientID = value
+        }else {
+            clientID = "MQTTnet"
         }
         keepalive = defaults.integer(forKey: "keepalive")
+        if keepalive == 0 {
+            port = 60
+        }
         cleanSession = defaults.integer(forKey: "cleanSession")
     }
     

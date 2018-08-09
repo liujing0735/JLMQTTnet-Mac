@@ -91,6 +91,29 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
         manager.cleanSessionFlag = true
         manager.delegate = self
         manager.connect()
+        
+        let preferences = PreferencesModel()
+        numberTextField.integerValue = preferences.clientNumber
+        subscribeTopicTextField.stringValue = preferences.subscribeTopic
+        subscribeQosLevel.selectItem(at: preferences.subscribeQosLevel)
+        publishTopicTextField.stringValue = preferences.publishTopic
+        publishQosLevel.selectItem(at: preferences.publishQosLevel)
+        publishMessageTextView.string = preferences.publishMessage
+        hexCheckButton.state = NSControl.StateValue(rawValue: preferences.isHexString)
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        
+        var preferences = PreferencesModel()
+        preferences.clientNumber = numberTextField.integerValue
+        preferences.subscribeTopic = subscribeTopicTextField.stringValue
+        preferences.subscribeQosLevel = subscribeQosLevel.indexOfSelectedItem
+        preferences.publishTopic = publishTopicTextField.stringValue
+        preferences.publishQosLevel = publishQosLevel.indexOfSelectedItem
+        preferences.publishMessage = publishMessageTextView.string
+        preferences.isHexString = hexCheckButton.state.rawValue
+        preferences.save()
     }
     
     // MARK: - JLMQTTManagerDelegate
@@ -196,4 +219,5 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
     func tableViewSelectionDidChange(_ notification: Notification) {
         
     }
+
 }
