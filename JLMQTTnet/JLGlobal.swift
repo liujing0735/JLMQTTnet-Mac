@@ -51,6 +51,8 @@ extension String {
             return data
         }
     }
+    
+    
 }
 
 struct PreferencesModel {

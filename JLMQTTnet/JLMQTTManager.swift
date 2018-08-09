@@ -200,7 +200,7 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             }
             break
         case .connectionClosed:
-            connect()
+            connect(session: session)
             break
         case .connectionClosedByBroker:
             break
