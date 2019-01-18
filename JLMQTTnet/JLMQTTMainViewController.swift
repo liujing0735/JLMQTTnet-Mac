@@ -36,8 +36,15 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
     }
     
     @IBAction func connectButtonAction(_ sender: NSButton) {
-        let manager = JLMQTTManager.shared
-        manager.addSessions(number: uint(numberTextField.integerValue))
+        if sender.title == "Connect" {
+            sender.title = "Disconnect"
+            let manager = JLMQTTManager.shared
+            manager.addSessions(number: uint(numberTextField.integerValue))
+        }else {
+            sender.title = "Connect"
+            let manager = JLMQTTManager.shared
+            manager.disconnect()
+        }
     }
     
     @IBAction func subscribeButtonAction(_ sender: NSButton) {
@@ -127,12 +134,47 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
         let date = formatter.string(from: now)
         
         var log = ""
+        var color = NSColor.white
         if error == nil {
             log = date + " ==> " + "[Connect] " + session.clientId + " connection was successful" + "\r\n"
+            color = NSColor.green
         }else {
-            log = date + " ==> " + "[Connect] " + session.clientId + " connection was failed: \(error)" + "\r\n"
+            log = date + " ==> " + "[Connect] " + session.clientId + " connection was failed: \(String(describing: error))" + "\r\n"
+            color = NSColor.red
         }
-        let attributed = NSAttributedString(string: log)
+        let attributed = NSMutableAttributedString(string: log)//NSAttributedString(string: log)
+        attributed.addAttributes([NSAttributedString.Key.foregroundColor: color], range: NSRange(location: 0, length: attributed.length))
+//        let range = (log as NSString).range(of: "[Connect]")
+//        attributed.addAttributes([NSAttributedString.Key.foregroundColor: NSColor.red], range: range)
+        
+        DispatchQueue.main.async {
+            self.logTextView.textStorage?.append(attributed)
+            self.logTextView.scrollRangeToVisible(NSMakeRange(self.logTextView.string.lengthOfBytes(using: String.Encoding.utf8), 0))
+        }
+    }
+    
+    func didDisconnect(session: MQTTSession, error: Error!) {
+        if let index = clients.firstIndex(of: session.clientId) {
+            clients.remove(at: index)
+            clientTableView.reloadData()
+        }
+        
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = formatter.string(from: now)
+        
+        var log = ""
+        var color = NSColor.white
+        if error == nil {
+            log = date + " ==> " + "[Disconnect] " + session.clientId + " disconnection was successful" + "\r\n"
+            color = NSColor.green
+        }else {
+            log = date + " ==> " + "[Disconnect] " + session.clientId + " disconnection was failed: \(String(describing: error))" + "\r\n"
+            color = NSColor.red
+        }
+        let attributed = NSMutableAttributedString(string: log)
+        attributed.addAttributes([NSAttributedString.Key.foregroundColor: color], range: NSRange(location: 0, length: attributed.length))
         
         DispatchQueue.main.async {
             self.logTextView.textStorage?.append(attributed)
@@ -147,12 +189,16 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
         let date = formatter.string(from: now)
         
         var log = ""
+        var color = NSColor.white
         if error == nil {
             log = date + " ==> " + "[Subscribe] " + session.clientId + " subscribe to the " + topic + " successfully" + "\r\n"
+            color = NSColor.green
         }else {
-            log = date + " ==> " + "[Subscribe] " + session.clientId + " subscribe to the " + topic + " failed: \(error)" + "\r\n"
+            log = date + " ==> " + "[Subscribe] " + session.clientId + " subscribe to the " + topic + " failed: \(String(describing: error))" + "\r\n"
+            color = NSColor.red
         }
-        let attributed = NSAttributedString(string: log)
+        let attributed = NSMutableAttributedString(string: log)
+        attributed.addAttributes([NSAttributedString.Key.foregroundColor: color], range: NSRange(location: 0, length: attributed.length))
         
         DispatchQueue.main.async {
             self.logTextView.textStorage?.append(attributed)
@@ -185,7 +231,8 @@ class JLMQTTMainViewController: NSViewController, JLMQTTManagerDelegate, NSTable
                 log = date + " ==> " + "[Receive] clientId = " + session.clientId + ", topic = " + topic + ", message = " + message + "\r\n"
             }
         }
-        let attributed = NSAttributedString(string: log)
+        let attributed = NSMutableAttributedString(string: log)
+        attributed.addAttributes([NSAttributedString.Key.foregroundColor: NSColor.blue], range: NSRange(location: 0, length: attributed.length))
         
         DispatchQueue.main.async {
             self.logTextView.textStorage?.append(attributed)

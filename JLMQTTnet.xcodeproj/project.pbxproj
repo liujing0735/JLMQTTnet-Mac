@@ -12,6 +12,9 @@
 		2209DA3321159F4D00736DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2209DA3121159F4D00736DFD /* Main.storyboard */; };
 		2209DA3F21159F4D00736DFD /* JLMQTTnetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DA3E21159F4D00736DFD /* JLMQTTnetTests.swift */; };
 		2209DA4A21159F4D00736DFD /* JLMQTTnetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DA4921159F4D00736DFD /* JLMQTTnetUITests.swift */; };
+		22332C362123B10B00D73116 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22332C352123B10B00D73116 /* Data+Extension.swift */; };
+		22332C382123B14500D73116 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22332C372123B14500D73116 /* String+Extension.swift */; };
+		22332C3A2123B23C00D73116 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22332C392123B23C00D73116 /* Dictionary+Extension.swift */; };
 		229060592117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229060582117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift */; };
 		2290605B2117F4140070EDC4 /* JLMQTTMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290605A2117F4140070EDC4 /* JLMQTTMainViewController.swift */; };
 		2290605D211829040070EDC4 /* JLGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290605C211829040070EDC4 /* JLGlobal.swift */; };
@@ -49,6 +52,9 @@
 		2209DA4521159F4D00736DFD /* JLMQTTnetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JLMQTTnetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2209DA4921159F4D00736DFD /* JLMQTTnetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLMQTTnetUITests.swift; sourceTree = "<group>"; };
 		2209DA4B21159F4D00736DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22332C352123B10B00D73116 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		22332C372123B14500D73116 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		22332C392123B23C00D73116 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		229060582117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLMQTTConfigurationPageController.swift; sourceTree = "<group>"; };
 		2290605A2117F4140070EDC4 /* JLMQTTMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLMQTTMainViewController.swift; sourceTree = "<group>"; };
 		2290605C211829040070EDC4 /* JLGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLGlobal.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 		2209DA2A21159F4C00736DFD /* JLMQTTnet */ = {
 			isa = PBXGroup;
 			children = (
+				22332C342123B0D300D73116 /* Extension-Swift */,
 				2209DA2B21159F4C00736DFD /* AppDelegate.swift */,
 				2290605A2117F4140070EDC4 /* JLMQTTMainViewController.swift */,
 				229060582117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift */,
@@ -140,6 +147,16 @@
 				2209DA4B21159F4D00736DFD /* Info.plist */,
 			);
 			path = JLMQTTnetUITests;
+			sourceTree = "<group>";
+		};
+		22332C342123B0D300D73116 /* Extension-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				22332C352123B10B00D73116 /* Data+Extension.swift */,
+				22332C372123B14500D73116 /* String+Extension.swift */,
+				22332C392123B23C00D73116 /* Dictionary+Extension.swift */,
+			);
+			path = "Extension-Swift";
 			sourceTree = "<group>";
 		};
 		31B99A95E428E595EF776CCD /* Pods */ = {
@@ -229,7 +246,7 @@
 				TargetAttributes = {
 					2209DA2721159F4C00736DFD = {
 						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -238,10 +255,12 @@
 					};
 					2209DA3921159F4D00736DFD = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 						TestTargetID = 2209DA2721159F4C00736DFD;
 					};
 					2209DA4421159F4D00736DFD = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 						TestTargetID = 2209DA2721159F4C00736DFD;
 					};
 				};
@@ -339,10 +358,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2290605D211829040070EDC4 /* JLGlobal.swift in Sources */,
+				22332C382123B14500D73116 /* String+Extension.swift in Sources */,
 				22906063211925DC0070EDC4 /* JLMQTTManager.swift in Sources */,
+				22332C3A2123B23C00D73116 /* Dictionary+Extension.swift in Sources */,
 				2290605B2117F4140070EDC4 /* JLMQTTMainViewController.swift in Sources */,
 				2209DA2C21159F4C00736DFD /* AppDelegate.swift in Sources */,
 				229060592117F3AC0070EDC4 /* JLMQTTConfigurationPageController.swift in Sources */,
+				22332C362123B10B00D73116 /* Data+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +546,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JLMQTTnet/JLMQTTnet-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -549,7 +571,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JLMQTTnet/JLMQTTnet-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -568,7 +590,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trudian.JLMQTTnetTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JLMQTTnet.app/Contents/MacOS/JLMQTTnet";
 			};
 			name = Debug;
@@ -588,7 +610,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trudian.JLMQTTnetTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JLMQTTnet.app/Contents/MacOS/JLMQTTnet";
 			};
 			name = Release;
@@ -607,7 +629,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trudian.JLMQTTnetUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = JLMQTTnet;
 			};
 			name = Debug;
@@ -626,7 +648,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trudian.JLMQTTnetUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = JLMQTTnet;
 			};
 			name = Release;

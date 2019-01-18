@@ -10,6 +10,7 @@ import Cocoa
 
 protocol JLMQTTManagerDelegate {
     func didConnect(session: MQTTSession, error: Error!)
+    func didDisconnect(session: MQTTSession, error: Error!)
     func didSubscribe(session: MQTTSession, error: Error!, topic: String, gQoss: [NSNumber]!)
     func didUnsubscribe(session: MQTTSession, error: Error!, topic: String)
     func didPublishData(session: MQTTSession, error: Error!, topic: String)
@@ -43,7 +44,7 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             return _random
         }
     }
-    private var _sessionIndex: Int = 0
+    private var _sessionIndex: Int = -1
     private var sessionIndex: Int {
         get {
             _sessionIndex += 1
@@ -75,7 +76,13 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
         session?.transport = transport
         session?.userName = self.userName
         session?.password = self.password
-        session?.clientId = self.clientId + "_" + "\(self.random)" + String(format: "%03d", self.sessionIndex)
+        
+        let sessionIndex = self.sessionIndex
+        if sessionIndex == 0 {
+            session?.clientId = self.clientId
+        }else {
+            session?.clientId = self.clientId + "_" + "\(self.random)" + String(format: "%03d", sessionIndex)
+        }
         session?.keepAliveInterval = self.keepAliveInterval
         session?.cleanSessionFlag = self.cleanSessionFlag
         return session!
@@ -195,12 +202,15 @@ class JLMQTTManager: NSObject, MQTTSessionDelegate {
             if delegate != nil {
                 delegate.didConnect(session: session, error: error)
             }
-            for topic in topicSet {
-                subscribe(session: session, topic: topic)
-            }
+//            for topic in topicSet {
+//                subscribe(session: session, topic: topic)
+//            }
             break
         case .connectionClosed:
-            connect(session: session)
+//            connect(session: session)
+            if delegate != nil {
+                delegate.didDisconnect(session: session, error: error)
+            }
             break
         case .connectionClosedByBroker:
             break
